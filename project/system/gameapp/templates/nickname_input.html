@@ -1,0 +1,16 @@
+<!-- templates/gameapp/nickname_input.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>아이디 입력력</title>
+</head>
+<body>
+    <h1>게임에 참여할 아이디를 입력해주세요</h1>
+    <form action="{% url 'nickname_submit' %}" method="POST">
+        {% csrf_token %}
+        <label for="name">별명: </label>
+        <input type="text" name="name" id="name" required>
+        <button type="submit">제출</button>
+    </form>
+</body>
+</html>

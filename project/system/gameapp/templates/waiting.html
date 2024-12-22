@@ -1,0 +1,33 @@
+<!-- templates/gameapp/thank_you.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>현재 게임 참여가 중단되었습니다.</title>
+</head>
+<body>
+    <h1>다음 게임이 시작되기 전까지 잠시만 기다려주세요.</h1>
+
+
+    <script>
+        // 1) 폴링 함수 정의
+        function checkGameState() {
+            fetch("{% url 'game_state_api' %}")  // /api/game-state/
+                .then(response => response.json())
+                .then(data => {
+                    // data = { is_open: true/false }
+                    if (data.is_open) {
+                        // is_open이 true면 닉네임 입력 폼으로 강제 이동
+                        window.location.href = "{% url 'nickname_input' %}";
+                    }
+                })
+                .catch(error => {
+                    console.error('에러 발생:', error);
+                });
+        }
+
+        // 2) 일정 간격(예: 5초)마다 checkGameState() 호출
+        setInterval(checkGameState, 2000);
+    </script>
+
+</body>
+</html>

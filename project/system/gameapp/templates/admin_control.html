@@ -1,0 +1,56 @@
+<!-- templates/gameapp/admin_control.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>관리자 페이지</title>
+</head>
+<body>
+    <h1>관리자 페이지</h1>
+
+    <h2>현재 상태: 
+        {% if game_state.is_open %}
+            <span style="color:green;">입력 가능</span>
+        {% else %}
+            <span style="color:red;">입력 중단</span>
+        {% endif %}
+    </h2>
+
+    <h2>별명 리스트 ({{ nicknames.count }}명)</h2>
+    <ul>
+        {% for nickname in nicknames %}
+        <li>{{ nickname.name }} ({{ nickname.created_at }})</li>
+        {% empty %}
+        <li>아직 아무도 입력하지 않았습니다.</li>
+        {% endfor %}
+    </ul>
+
+    <!-- 입력 중단 버튼 -->
+    <form action="{% url 'stop_input' %}" method="POST" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit">입력 중단 (게임 시작)</button>
+    </form>
+
+    <!-- 입력 재개 (별명 모두 삭제 후 재시작) -->
+    <form action="{% url 'start_input' %}" method="POST" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit">학번 입력 시작 (리셋)</button>
+    </form>
+
+
+    <script>
+        function updateNicknameCount() {
+            fetch("{% url 'nickname_count_api' %}")  // /api/nickname-count/
+                .then(response => response.json())
+                .then(data => {
+                    // data = { count: 5 }
+                    // nickname-count 요소의 텍스트 갱신
+                    document.getElementById('nickname-count').textContent = data.count;
+                })
+                .catch(error => console.error('Error:', error));
+    }
+    
+
+    setInterval(updateNicknameCount, 1000);
+    </script>
+</body>
+</html>

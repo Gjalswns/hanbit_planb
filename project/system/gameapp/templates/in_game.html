@@ -1,0 +1,36 @@
+<!-- templates/gameapp/in_game.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>게임에 참여했습니다.</title>
+</head>
+<body>
+    <h1>게임에 참여했습니다.</h1>
+    {% if nickname %}
+        <p>ID: <strong>{{ nickname }}</strong></p>
+        <p>이 페이지를 닫지 마시고 전방 화면을 봐주세요.</p>
+        <p>다른 페이지로 이동하면 경품추첨에서 제외됩니다.</p>
+    {% endif %}
+
+    <script>
+        // 1) 폴링 함수 정의
+        function checkGameState() {
+            fetch("{% url 'game_state_api' %}")  // /api/game-state/
+                .then(response => response.json())
+                .then(data => {
+                    // data = { is_open: true/false }
+                    if (data.is_open) {
+                        // is_open이 true면 닉네임 입력 폼으로 강제 이동
+                        window.location.href = "{% url 'nickname_input' %}";
+                    }
+                })
+                .catch(error => {
+                    console.error('에러 발생:', error);
+                });
+        }
+
+        // 2) 일정 간격(예: 5초)마다 checkGameState() 호출
+        setInterval(checkGameState, 2000);
+    </script>
+</body>
+</html>
