@@ -1,0 +1,81 @@
+/* nickname_input.css */
+/* 1) 비디오를 페이지 전체 배경으로 */
+.video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  z-index: -1; /* 컨텐츠보다 뒤로 가도록 */
+}
+
+.video-background video {
+    width: 100%;
+    height: 100%;
+  object-fit: cover; /* 화면에 꽉 채움 */
+}
+
+/* 2) 중앙 정렬 컨텐츠 */
+.center-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center; /* 가로 중앙 정렬 */
+    color: #fff; /* 기본 글자색을 흰색으로 */
+    z-index: 1; /* 비디오보다 위에 표시 */
+}
+
+.center-content h1 {
+    margin-bottom: 1rem;
+}
+
+.center-content form {
+    display: inline-block;
+  background-color: rgba(0, 0, 0, 0.5); /* 반투명 배경(선택사항) */
+    padding: 1rem 2rem;
+    border-radius: 8px;
+}
+
+.center-content label {
+    margin-right: 0.5rem;
+    font-weight: bold;
+}
+
+.center-content input[type="text"] {
+    padding: 0.5rem;
+    margin-right: 0.5rem;
+    border: none;
+    border-radius: 4px;
+}
+
+.center-content button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+  background-color: #ff9800; /* 주황색(예시) */
+    color: #fff;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.center-content button:hover {
+  background-color: #e68a00; /* hover 효과 */
+}
+
+
+.center-content button {
+    margin: 0.5rem; /* 버튼 간격 */
+    padding: 0.5rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    background-color: #4CAF50; /* 초록색 버튼 */
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.center-content button:hover {
+    background-color: #45a049; /* hover 효과 */
+}

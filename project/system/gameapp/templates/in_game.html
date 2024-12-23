@@ -10,9 +10,11 @@
         <p>ID: <strong>{{ nickname }}</strong></p>
         <p>이 페이지를 닫지 마시고 전방 화면을 봐주세요.</p>
         <p>다른 페이지로 이동하면 경품추첨에서 제외됩니다.</p>
+        <!-- 추가: 기본 화면으로 이동 -->
+        <button onclick="location.href='/'">기본 화면으로 이동</button>
     {% endif %}
 
-    <script>
+    <!-- <script>
         // 1) 폴링 함수 정의
         function checkGameState() {
             fetch("{% url 'game_state_api' %}")  // /api/game-state/
@@ -31,6 +33,6 @@
 
         // 2) 일정 간격(예: 5초)마다 checkGameState() 호출
         setInterval(checkGameState, 2000);
-    </script>
+    </script> -->
 </body>
 </html>
